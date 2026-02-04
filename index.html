@@ -7,6 +7,8 @@
 <meta name="theme-color" content="#0b1a27">
 
 <title>CGA Güvenlik Sistemleri - Giriş Paneli</title>
+<link rel="manifest" href="manifest.json">
+
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -407,6 +409,38 @@ document.addEventListener("keydown", function (e) {
   v1.0.0 
 </div>
 
+<!-- PWA Yükleme Butonu -->
+<button id="installBtn"
+  style="position: fixed; top: 12px; left: 12px; font-size: 20px; display:none; z-index:500;">
+  📲 Uygulamayı Yükle
+</button>
+
+<script>
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+  installBtn.style.display = 'none';
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    deferredPrompt = null;
+  }
+});
+
+// Service Worker kaydı
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js');
+  });
+}
+</script>
 
 </body>
 </html>

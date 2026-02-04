@@ -1,6 +1,6 @@
 {
-  "name": "qr Devriye",
-  "short_name": "qr Devriye",
+  "name": "Site Sakinleri ",
+  "short_name": "Site Sakinleri",
   "description": "QR kodlu güvenlik denetleme ve raporlama sistemi",
   "start_url": "index.html",
   "scope": "./",
@@ -38,3 +38,4 @@
     }
   ]
 }
+
